@@ -1,0 +1,7 @@
+set_prop(zygote, qemu_prop)
+# TODO (b/63631799) fix this access
+# Suppress denials to storage. Webview zygote should not be accessing.
+dontaudit webview_zygote mnt_expand_file:dir getattr;
+
+allow zygote binfmt_miscfs:dir { search getattr read write };
+allow zygote binfmt_miscfs:file { rw_file_perms };

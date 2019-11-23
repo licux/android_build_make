@@ -1,0 +1,13 @@
+# nativebridge_setup service: runs init.ranchu-nb.sh script
+type nativebridge_setup, domain, coredomain;
+type nativebridge_setup_exec, exec_type, file_type;
+
+init_daemon_domain(nativebridge_setup)
+
+wakelock_use(nativebridge_setup);
+allow nativebridge_setup shell_exec:file { rx_file_perms };
+allow nativebridge_setup toolbox_exec:file { rx_file_perms };
+allow nativebridge_setup proc_modules:file { r_file_perms };
+allow zygote nativebridge_setup_exec:file { rx_file_perms entrypoint };
+allow zygote shell_exec:file { rx_file_perms };
+allow zygote toolbox_exec:file { rx_file_perms };
